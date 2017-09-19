@@ -36,7 +36,7 @@ public class MainActivityFragment extends Fragment implements JokeAsyncTask.Joke
     }
 
     public void tellJoke() {
-        JokeAsyncTask jokeAsyncTask = new JokeAsyncTask(getContext(), this);
+        JokeAsyncTask jokeAsyncTask = new JokeAsyncTask(this);
         jokeAsyncTask.execute();
     }
 

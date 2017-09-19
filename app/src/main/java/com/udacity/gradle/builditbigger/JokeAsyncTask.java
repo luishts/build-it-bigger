@@ -1,8 +1,6 @@
 package com.udacity.gradle.builditbigger;
 
-import android.content.Context;
 import android.os.AsyncTask;
-import android.widget.Toast;
 
 import com.example.builditbigger.backend.jokeApi.JokeApi;
 import com.google.api.client.extensions.android.http.AndroidHttp;
@@ -18,12 +16,10 @@ import java.io.IOException;
 
 public class JokeAsyncTask extends AsyncTask<Void, Void, String> {
 
-    private Context mContext;
     private JokeCallback mJokeCallback;
     private static JokeApi mJokeApiService = null;
 
-    public JokeAsyncTask(Context context, JokeCallback callback) {
-        this.mContext = context;
+    public JokeAsyncTask(JokeCallback callback) {
         this.mJokeCallback = callback;
     }
 
@@ -62,7 +58,6 @@ public class JokeAsyncTask extends AsyncTask<Void, Void, String> {
         if (mJokeCallback != null) {
             mJokeCallback.onJokeReceived(result);
         }
-        Toast.makeText(mContext, result, Toast.LENGTH_LONG).show();
     }
 
     public interface JokeCallback {
