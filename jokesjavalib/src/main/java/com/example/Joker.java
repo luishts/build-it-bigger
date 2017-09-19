@@ -7,11 +7,9 @@ import java.util.Random;
  */
 
 public class Joker {
-
-    Random random = new Random();
-
-    public String getJoke() {
+    public static String getJoke() {
         String joke = "";
+        Random random = new Random();
         switch (random.nextInt(3)) {
             case 1:
                 joke = "Q:  Mummy, why do all the other kids call me a hairy werewolf? " +

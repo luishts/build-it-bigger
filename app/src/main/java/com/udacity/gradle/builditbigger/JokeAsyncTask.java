@@ -16,13 +16,13 @@ import java.io.IOException;
  * Created by ltorres on 19/09/2017.
  */
 
-public class EndpointsAsyncTask extends AsyncTask<Void, Void, String> {
+public class JokeAsyncTask extends AsyncTask<Void, Void, String> {
 
     private Context mContext;
     private JokeCallback mJokeCallback;
     private static JokeApi mJokeApiService = null;
 
-    public EndpointsAsyncTask(Context context, JokeCallback callback) {
+    public JokeAsyncTask(Context context, JokeCallback callback) {
         this.mContext = context;
         this.mJokeCallback = callback;
     }

@@ -5,13 +5,13 @@ package com.example.builditbigger.backend;
  */
 public class MyBean {
 
-    private String myData;
+    private String myJoke;
 
-    public String getData() {
-        return myData;
+    public String getJoke() {
+        return myJoke;
     }
 
-    public void setData(String data) {
-        myData = data;
+    public void setJoke(String myJoke) {
+        this.myJoke = myJoke;
     }
 }

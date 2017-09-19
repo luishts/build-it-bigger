@@ -5,21 +5,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
-import com.example.Joker;
-
-
-public class MainActivity extends AppCompatActivity {
-
-    private Joker mJoker;
+public class MainActivity extends AppCompatActivity implements JokeAsyncTask.JokeCallback {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        mJoker = new Joker();
     }
 
 
@@ -46,9 +38,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void tellJoke(View view) {
-
-        Toast.makeText(this, mJoker.getJoke(), Toast.LENGTH_SHORT).show();
+        JokeAsyncTask jokeAsyncTask = new JokeAsyncTask(this, this);
+        jokeAsyncTask.execute();
     }
 
+    @Override
+    public void onJokeReceived(String joke) {
 
+    }
 }
