@@ -4,9 +4,8 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 
-public class MainActivity extends AppCompatActivity implements JokeAsyncTask.JokeCallback {
+public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,15 +34,5 @@ public class MainActivity extends AppCompatActivity implements JokeAsyncTask.Jok
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    public void tellJoke(View view) {
-        JokeAsyncTask jokeAsyncTask = new JokeAsyncTask(this, this);
-        jokeAsyncTask.execute();
-    }
-
-    @Override
-    public void onJokeReceived(String joke) {
-
     }
 }

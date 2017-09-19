@@ -15,7 +15,7 @@
     <facet type="app-engine-gradle" name="App Engine Gradle">
       <configuration>
         <option name="HTTP_ADDRESS" value="localhost" />
-        <option name="HTTP_PORT" value="8085" />
+        <option name="HTTP_PORT" value="8080" />
         <option name="WAR_DIR" value="C:\Desenvolvimento\studio_ws\build-it-bigger\backend\build\exploded-app" />
         <option name="WEB_APP_DIR" value="C:\Desenvolvimento\studio_ws\build-it-bigger\backend\src\main\webapp" />
         <option name="APPENGINE_SDKROOT" value="C:\Users\ltorres\.gradle\appengine-sdk\appengine-java-sdk-1.9.42" />
