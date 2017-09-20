@@ -174,5 +174,9 @@
     <orderEntry type="library" exported="" name="android-android-26" level="project" />
     <orderEntry type="module" module-name="backend" exported="" />
     <orderEntry type="module" module-name="jokesandroidlib" exported="" />
+    <orderEntry type="module" module-name="backend" exported="" />
+    <orderEntry type="module" module-name="jokesandroidlib" exported="" />
+    <orderEntry type="module" module-name="backend" exported="" />
+    <orderEntry type="module" module-name="jokesandroidlib" exported="" />
   </component>
 </module>
