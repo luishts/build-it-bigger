@@ -2,6 +2,7 @@ package com.udacity.gradle.builditbigger;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,8 +10,10 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.example.jokesandroidlib.JokeActivity;
+import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.InterstitialAd;
 
 
 /**
@@ -19,8 +22,19 @@ import com.google.android.gms.ads.AdView;
 public class MainActivityFragment extends Fragment implements JokeAsyncTask.JokeCallback {
 
     private Button mJokeButton;
+    private InterstitialAd mInterstitialAd;
 
     public MainActivityFragment() {
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        setRetainInstance(true);
+
+        mInterstitialAd = new InterstitialAd(getActivity());
+        mInterstitialAd.setAdUnitId(getString(R.string.banner_ad_unit_id));
+        mInterstitialAd.loadAd(new AdRequest.Builder().build());
     }
 
     @Override
@@ -35,6 +49,7 @@ public class MainActivityFragment extends Fragment implements JokeAsyncTask.Joke
                 tellJoke();
             }
         });
+
 
         AdView mAdView = (AdView) root.findViewById(R.id.adView);
         // Create an ad request. Check logcat output for the hashed device ID to
@@ -57,12 +72,30 @@ public class MainActivityFragment extends Fragment implements JokeAsyncTask.Joke
     }
 
     @Override
-    public void onJokeReceived(String joke) {
-        if (getActivity() != null) {
-            ((MainActivity) getActivity()).showProgressDialog(false, null);
+    public void onJokeReceived(final String joke) {
+
+        if (mInterstitialAd.isLoaded()) {
+            mInterstitialAd.show();
         }
-        Intent intent = new Intent(getActivity(), JokeActivity.class);
-        intent.putExtra(Util.JOKE_KEY, joke);
-        startActivity(intent);
+
+        mInterstitialAd.setAdListener(new AdListener() {
+            @Override
+            public void onAdLoaded() {
+
+            }
+
+            @Override
+            public void onAdClosed() {
+                if (getActivity() != null) {
+                    ((MainActivity) getActivity()).showProgressDialog(false, null);
+                }
+
+                Intent intent = new Intent(getActivity(), JokeActivity.class);
+                intent.putExtra(Util.JOKE_KEY, joke);
+                startActivity(intent);
+
+                mInterstitialAd.loadAd(new AdRequest.Builder().build());
+            }
+        });
     }
 }
