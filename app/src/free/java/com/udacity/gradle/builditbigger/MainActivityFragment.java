@@ -48,12 +48,19 @@ public class MainActivityFragment extends Fragment implements JokeAsyncTask.Joke
     }
 
     public void tellJoke() {
+        if (getActivity() != null) {
+            ((MainActivity) getActivity()).showProgressDialog(true,
+                    getString(R.string.loading_joke));
+        }
         JokeAsyncTask jokeAsyncTask = new JokeAsyncTask(this);
         jokeAsyncTask.execute();
     }
 
     @Override
     public void onJokeReceived(String joke) {
+        if (getActivity() != null) {
+            ((MainActivity) getActivity()).showProgressDialog(false, null);
+        }
         Intent intent = new Intent(getActivity(), JokeActivity.class);
         intent.putExtra(Util.JOKE_KEY, joke);
         startActivity(intent);

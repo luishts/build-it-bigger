@@ -29,6 +29,10 @@ public class MainActivityFragment extends Fragment implements JokeAsyncTask.Joke
         mJokeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (getActivity() != null) {
+                    ((MainActivity) getActivity()).showProgressDialog(true,
+                            getString(R.string.loading_joke));
+                }
                 tellJoke();
             }
         });
@@ -42,6 +46,9 @@ public class MainActivityFragment extends Fragment implements JokeAsyncTask.Joke
 
     @Override
     public void onJokeReceived(String joke) {
+        if (getActivity() != null) {
+            ((MainActivity) getActivity()).showProgressDialog(false, null);
+        }
         Intent intent = new Intent(getActivity(), JokeActivity.class);
         intent.putExtra(Util.JOKE_KEY, joke);
         startActivity(intent);

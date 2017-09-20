@@ -1,11 +1,14 @@
 package com.udacity.gradle.builditbigger;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
 public class MainActivity extends AppCompatActivity {
+
+    private ProgressDialog mProgressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,5 +37,24 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    protected void showProgressDialog(boolean show, String message) {
+        if (!this.isFinishing()) {
+            if (show) {
+                if (mProgressDialog == null) {
+                    mProgressDialog = new ProgressDialog(this);
+                }
+                mProgressDialog.setMessage(message);
+                mProgressDialog.setCancelable(false);
+                if (!mProgressDialog.isShowing()) {
+                    mProgressDialog.show();
+                }
+            } else {
+                if (mProgressDialog != null && mProgressDialog.isShowing()) {
+                    mProgressDialog.dismiss();
+                }
+            }
+        }
     }
 }
