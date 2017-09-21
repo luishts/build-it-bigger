@@ -1,10 +1,11 @@
 package com.udacity.gradle.builditbigger;
 
+import android.app.LoaderManager;
 import android.content.Intent;
+import android.content.Loader;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.LoaderManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -72,21 +73,21 @@ public class MainActivityFragment extends Fragment {
         }
 
         if (getLoaderManager().getLoader(ID_JOKE_LOADER) != null) {
-            getLoaderManager().restartLoader(ID_JOKE_LOADER, null, mLoaderCallback).forceLoad();
+            getActivity().getLoaderManager().restartLoader(ID_JOKE_LOADER, null, mLoaderCallback).forceLoad();
         } else {
-            getLoaderManager().initLoader(ID_JOKE_LOADER, null, mLoaderCallback).forceLoad();
+            getActivity().getLoaderManager().initLoader(ID_JOKE_LOADER, null, mLoaderCallback).forceLoad();
         }
     }
 
     LoaderManager.LoaderCallbacks<String> mLoaderCallback = new LoaderManager.LoaderCallbacks<String>() {
 
         @Override
-        public android.support.v4.content.Loader<String> onCreateLoader(int id, Bundle args) {
+        public Loader<String> onCreateLoader(int id, Bundle args) {
             return new JokeTaskLoader(getActivity());
         }
 
         @Override
-        public void onLoadFinished(android.support.v4.content.Loader<String> loader, final String joke) {
+        public void onLoadFinished(Loader<String> loader, final String joke) {
             if (mInterstitialAd.isLoaded()) {
                 mInterstitialAd.show();
             }
@@ -113,9 +114,9 @@ public class MainActivityFragment extends Fragment {
         }
 
         @Override
-        public void onLoaderReset(android.support.v4.content.Loader<String> loader) {
+        public void onLoaderReset(Loader<String> loader) {
             if (getLoaderManager().getLoader(ID_JOKE_LOADER) != null) {
-                getLoaderManager().restartLoader(ID_JOKE_LOADER, null, this).forceLoad();
+                getActivity().getLoaderManager().restartLoader(ID_JOKE_LOADER, null, this).forceLoad();
             }
         }
     };

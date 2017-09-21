@@ -1,7 +1,7 @@
 package com.udacity.gradle.builditbigger;
 
+import android.content.AsyncTaskLoader;
 import android.content.Context;
-import android.support.v4.content.AsyncTaskLoader;
 
 import com.example.builditbigger.backend.jokeApi.JokeApi;
 import com.google.api.client.extensions.android.http.AndroidHttp;

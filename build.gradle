@@ -20,3 +20,37 @@ allprojects {
         }
     }
 }
+
+task testTask (dependsOn: ['launchGCE', 'runTests', 'shutDownGCE']){
+    group = 'Gradle Task'
+    description = 'Launches, Runs Tests and Shuts down'
+}
+
+task launchGCE {
+    dependsOn ':backend:appengineRun'
+    evaluationDependsOn(":backend")
+    project(':backend').appengine.daemon = true
+
+    doLast{
+        println("launching GCE server")
+    }
+}
+
+task runTests {
+    dependsOn ':app:connectedAndroidTest'
+    mustRunAfter "launchGCE"
+
+    doLast{
+        println("running tests")
+    }
+}
+
+task shutDownGCE {
+    dependsOn ':backend:appengineStop'
+    mustRunAfter "runTests"
+
+    doLast{
+        println("stopping GCE server")
+    }
+}
+
